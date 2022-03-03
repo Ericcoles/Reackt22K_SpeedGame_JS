@@ -40,6 +40,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 .circle.active {
@@ -90,6 +91,11 @@ button {
 #result {
   font-size: 2rem;
 }
+
+#stop {
+  display: none;
+}
+
 /* 
 button {
   font-family: "Shizuru", cursive;
