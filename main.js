@@ -6,12 +6,19 @@ const circles = document.querySelectorAll(".circle");
 const scoreText = document.querySelector("#score");
 const resultText = document.querySelector("#result");
 
+var myMusic;
+
 let active = 0;
 let score = 0;
-let pace = 3000;
-let rounds = -1;
+let pace = 1500;
+let rounds = -3;
 // let rounds = 0;
 let timer;
+
+function startMusic() {
+  myMusic = new sound("sound/bubbles.mp3");
+  myMusic.play();
+}
 
 // let container = document.querySelector(".circles");
 
@@ -57,7 +64,7 @@ const startGame = () => {
   active = nextActive;
   console.log("active circle:", active);
   timer = setTimeout(startGame, pace);
-  pace = pace - 10;
+  pace = pace - 30;
 
   if (rounds >= 1) {
     endGame();
@@ -87,9 +94,44 @@ const reloadGame = () => {
   window.location.reload();
 };
 
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function () {
+    this.sound.play();
+  };
+  this.stop = function () {
+    this.sound.pause();
+  };
+}
+
 startButton.addEventListener("click", startGame);
 endButton.addEventListener("click", endGame);
 closeButton.addEventListener("click", reloadGame);
+
+// function sound(src) {
+//   this.sound = document.createElement("audio");
+//   this.sound.src = src;
+//   this.sound.setAttribute("preload", "auto");
+//   this.sound.setAttribute("controls", "none");
+//   this.sound.style.display = "none";
+//   document.body.appendChild(this.sound);
+//   this.play = function () {
+//     this.sound.play();
+//   };
+//   this.stop = function () {
+//     this.sound.pause();
+//   };
+
+//   const startGameMusic = () => {
+//     startSound = new sound("sound/arcade.wav");
+//     startSound.play();
+//   };
+// }
 
 // startButton.addEventListener("click", startGame);
 // endButton.addEventListener("click", endGame);
