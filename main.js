@@ -15,10 +15,10 @@ let rounds = -3;
 // let rounds = 0;
 let timer;
 
-function startMusic() {
-  myMusic = new sound("sound/bubbles.mp3");
-  myMusic.play();
-}
+const startAll = () => {
+  startMusic();
+  startGame();
+};
 
 // let container = document.querySelector(".circles");
 
@@ -83,17 +83,6 @@ const startGame = () => {
   }
 };
 
-const endGame = () => {
-  console.log("game ended");
-  clearTimeout(timer);
-  overlay.style.visibility = "visible";
-  resultText.textContent = `Your Final score was ${score}`;
-};
-
-const reloadGame = () => {
-  window.location.reload();
-};
-
 function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
@@ -109,7 +98,24 @@ function sound(src) {
   };
 }
 
-startButton.addEventListener("click", startGame);
+function startMusic() {
+  myMusic = new sound("sound/bubbles.mp3");
+  myMusic.play();
+}
+
+const endGame = () => {
+  myMusic.stop();
+  console.log("game ended");
+  clearTimeout(timer);
+  overlay.style.visibility = "visible";
+  resultText.textContent = `Your Final score was ${score}`;
+};
+
+const reloadGame = () => {
+  window.location.reload();
+};
+
+startButton.addEventListener("click", startAll);
 endButton.addEventListener("click", endGame);
 closeButton.addEventListener("click", reloadGame);
 
